@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div style="display: flex">
+      <p>Email:</p>
+      <input type="email" name="email" />
+
+      <img src="" />
+    </div>
+
+    <script>
+      const emailInput = document.querySelector("input");
+      const img = document.querySelector("img");
+
+      window.onload = () => {
+        // const myPromise = new Promise((resolve, reject) => {
+        //     if (confirm("Do you like cookies?")) {
+        //         resolve("i am the message")
+        //     } else {
+        //         reject(new Error("No cookies thanks"))
+        //     }
+        // })
+
+        // myPromise
+        //     .then(msg => console.log(msg))
+        //     .catch(err => console.log(err.message))
+
+        // console.log("something else")
+
+        fetch("https://randomuser.me/api", {
+          method: "GET",
+          headers: {
+            "x-rapid-api-auth": "79dgyfsad80f76gtasd0f87gt",
+          },
+        })
+          .then((response) => response.json())
+          .then((body) => {
+            console.log(body);
+            console.log(body.results[0].email);
+
+            emailInput.value = body.results[0].email;
+            img.src = body.results[0].picture.large;
+          })
+          .catch((err) => console.log(err.message));
+      };
+    </script>
+  </body>
+</html>
